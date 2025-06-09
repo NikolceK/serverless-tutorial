@@ -1,0 +1,21 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.12
+    commands:
+      - echo "Installing Serverless Framework..."
+      - npm install --silent --no-progress -g serverless
+      - echo "Installing dependencies..."
+      # - pip install -r requirements.txt
+  # pre_build:
+  #   commands:
+  #     - echo "Running pre-build tasks..."
+  build:
+    commands:
+      - echo "Building the project..."
+      - serverless deploy --stage $ENVIRONMENT --region $REGION --conceal --vrbose
+      - echo "Deployment complete."
+  # post_build:
+  #   commands:
+  #     - echo "Post-build tasks..."
