@@ -1,0 +1,21 @@
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: serverless-tutorial
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: python3.12
+  stage: ${opt:stage, 'dev'}  # Uses CLI --stage or defaults to 'dev'
+  region: us-east-1
+
+functions:
+  hello:
+    handler: handler.hello
+    name: serverless-tutorial-${self:provider.stage}-hello  # Dynamic function name
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+plugins:
+  - serverless-python-requirements
